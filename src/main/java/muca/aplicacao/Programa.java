@@ -13,9 +13,10 @@ public class Programa {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("exemplo-jpa");
 		EntityManager em = emf.createEntityManager();
 		
-		Cadastro cad = em.find(Cadastro.class, 1); //find é uma função que busca pelo id
-		
-		System.out.println(cad);
+		Cadastro cad = em.find(Cadastro.class, 1); //tem que fazer uma busca depois chamar o begin e finalizar com o commit
+		em.getTransaction().begin();
+		em.remove(cad);
+		em.getTransaction().commit();
 		
 		System.out.println("Pronto");
 		
